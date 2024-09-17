@@ -20,7 +20,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if($created) {
         $_SESSION['message']['text'] = "Successfully registered!";
         $_SESSION['message']['type'] = "success";
-        header("location: index.php");
+        header("location: login.php");
         exit();
     } else {
         $_SESSION['message']['text'] = "User with this email already exists!";
@@ -32,15 +32,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <section>
     <div class="container bg-light p-5 rounded">
-        <?php if(isset($_SESSION['message'])) : ?>
-            <div class="alert alert-<?= $_SESSION['message']['type'] ?> alert-dismissible fade show">
-                <?php
-                    echo $_SESSION['message']['text'];
-                    unset($_SESSION['message']);
-                ?>
-                <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
         <h1>Register to our hotel</h1>
         <form action="" method="post" class="mt-5">
             <div class="mb-3">

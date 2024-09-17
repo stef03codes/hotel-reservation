@@ -23,17 +23,28 @@ require_once 'app/config/config.php';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Apartments</a>
+                    <a class="nav-link" href="apartments.php">Apartments</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reserve your Room</a>
+                    <a class="nav-link" href="about.php">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="contact.php">Contact</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <a class="btn btn-outline-dark" href="login.php">Login</a>
+            <form class="d-flex align-items-center">
+                <?php if(isset($_SESSION['user_id'])) : ?>
+                    <a href="#" class="btn btn-outline-dark me-3">
+                        <i class="fa-solid fa-user me-1"></i>
+                        <?= $_SESSION['name']; ?>
+                    </a>
+                    <a href="logout.php" class="btn btn-danger">Logout</a>
+                <?php else : ?>
+                    <a class="btn btn-outline-dark" href="login.php">Login</a>
+                <?php endif; ?>
             </form>
         </div>
     </div>
