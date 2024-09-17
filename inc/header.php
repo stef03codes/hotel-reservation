@@ -37,7 +37,7 @@ require_once 'app/config/config.php';
             </ul>
             <form class="d-flex align-items-center">
                 <?php if(isset($_SESSION['user_id'])) : ?>
-                    <a href="#" class="btn btn-outline-dark me-3">
+                    <a href="reservations.php" class="btn btn-outline-dark me-3" title="View Reservations">
                         <i class="fa-solid fa-user me-1"></i>
                         <?= $_SESSION['name']; ?>
                     </a>

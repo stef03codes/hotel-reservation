@@ -31,6 +31,16 @@ class User {
         }
     }
 
+    public function get_user($user_id)
+    {
+        $sql = "SELECT * FROM users WHERE user_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
+    }
+
     public function login($email, $password) : bool
     {
         $sql = "SELECT user_id, name, email, password FROM users WHERE email = ?";
@@ -59,6 +69,16 @@ class User {
         $stmt->execute();
         $result = $stmt->get_result();
         return ($result->num_rows == 1);
+    }
+
+    public function is_admin($user_id)
+    {
+        $sql = "SELECT is_admin FROM users WHERE user_id = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_assoc();
     }
 
     public function logout()

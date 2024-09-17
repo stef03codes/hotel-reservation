@@ -3,6 +3,7 @@
 require_once 'inc/header.php';
 require_once 'app/classes/User.php';
 
+
 if(isset($_SESSION['user_id'])) {
     header('location: index.php');
     exit();
@@ -11,14 +12,21 @@ if(isset($_SESSION['user_id'])) {
 if($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $user = new User();
 
+    $user = new User();
     $result = $user->login($email, $password);
 
     if (!$result) {
         $_SESSION['message']['text'] = "Invalid username or password!";
         $_SESSION['message']['type'] = "danger";
         header("location: login.php");
+        exit();
+    }
+
+    $is_admin = $user->is_admin($_SESSION['user_id'])['is_admin'];
+    if($is_admin) {
+        $_SESSION['name'] = $result['name'];
+        header('location: admin/index.php');
         exit();
     }
 
